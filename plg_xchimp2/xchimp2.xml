@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<extension method="upgrade" type="plugin" group="user">
+	<name>plg_user_xchimp2</name>
+	<author>Parvez Akther, Brett Vachon</author>
+	<creationDate>July 2014</creationDate>
+	<copyright>(C) 2010 - 2014 ThemeXpert for XChimp. Xchimp2 version (C) 2025 by Brett.</copyright>
+	<license>GNU General Public License version 3 or later</license>
+	<authorEmail>info@themexpert.com</authorEmail>
+	<authorUrl>https://www.naftee.com</authorUrl>
+	<version>1.0</version>
+  <namespace path="src">Naftee\Plugin\User\Xchimp2</namespace>
+	<description>PLG_USER_XCHIMP2_XML_DESCRIPTION</description>
+	<files>
+		<folder plugin="xchimp2">services</folder>
+    <folder>src</folder>
+		<folder>lib</folder>
+    <folder>language</folder>
+	</files>
+  <languages folder="language">
+		<language tag="en-GB">en-GB/plg_user_xchimp2.ini</language>
+		<language tag="en-GB">en-GB/plg_user_xchimp2.sys.ini</language>
+    <language tag="fr-FR">fr-FR/plg_user_xchimp2.ini</language>
+		<language tag="fr-FR">fr-FR/plg_user_xchimp2.sys.ini</language>
+	</languages>
+
+  <config>
+		<fields name="params" addfieldprefix="Naftee\Plugin\User\Xchimp2\Field">
+
+			<fieldset name="basic">
+
+        <field name="note" type="note"
+          label="PLG_USER_XCHIMP2_NOTE_LABEL"
+          description="PLG_USER_XCHIMP2_NOTE_DESC"
+          inlineHelp="true"
+          class="alert alert-info"
+        />
+
+				<field name="apikey" type="text" 
+          class="form-control"	
+          label="PLG_USER_XCHIMP2_FIELD_APIKEY"  
+          description="PLG_USER_XCHIMP2_FIELD_APIKEY_DESC"
+        />
+
+        <field name="listid" type="mailchimplists"
+          label="PLG_USER_XCHIMP2_FIELD_LISTID"
+          description="PLG_USER_XCHIMP2_FIELD_LISTID_DESC" 
+        />
+        
+        <field name="tags" type="text"
+          class="form-control"
+          label="PLG_USER_XCHIMP2_FIELD_TAGS"
+          description="PLG_USER_XCHIMP2_FIELD_TAGS_DESC"
+        />
+
+			</fieldset>
+
+		</fields>
+	</config>
+</extension>

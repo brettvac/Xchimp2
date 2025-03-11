@@ -1,0 +1,127 @@
+<?php
+/*****************************************************************
+ * @package Xchimp2
+ * @license http://www.gnu.org/licenses/gpl-3.0.html GNU/GPLv3 only
+ *****************************************************************/
+namespace Naftee\Plugin\User\Xchimp2\Extension;
+
+use Joomla\CMS\Plugin\CMSPlugin;
+use Joomla\Event\SubscriberInterface;
+use Joomla\Event\Event;
+use Joomla\CMS\Log\Log;
+use Joomla\CMS\Factory;
+
+use DrewM\MailChimp\MailChimp;
+
+defined('_JEXEC') or die; // No direct access
+
+class Xchimp2 extends CMSPlugin implements SubscriberInterface
+  {
+  
+  public static function getSubscribedEvents(): array
+    {
+    return [ 'onUserAfterSave' => 'handleUserAfterSave' ];
+    }
+    
+  /**
+    * Method is called after user data is stored in the database
+    */
+  public function handleUserAfterSave(Event $event): void
+    {
+      
+    [ $user, $isnew, $success, $msg ] = array_values($event->getArguments());       
+
+    if (!$success) 
+      {
+      return; //User save was not successful
+      }
+
+    //Pull in the parameters    
+    $apikey = $this->params->get('apikey');
+    $listid = $this->params->get('listid');
+    $tagsInput = $this->params->get('tags');
+       
+    // Trim the name to remove leading/trailing spaces
+    $trimName = trim($user['name']);
+
+    // Check if there are any spaces
+    if ((substr_count($trimName, ' ')) == 0) 
+      { // Only one name
+      $firstName = $trimName;
+      $lastName = '';
+      } 
+    else 
+      {// Split the name for first and last name
+      $name = explode(' ', $trimName);
+      $firstName = $name[0] ?? '';
+      $lastName = implode(' ', array_slice($name, 1)); //Handles multiple last names
+      }
+    
+    //Create array from tags for Mailchimp subscription
+    $tags = [];
+    
+    if (!empty($tagsInput)) 
+      {
+      $tagsArray = explode(',', $tagsInput);
+    
+      foreach ($tagsArray as $tag) 
+        {
+        $tag = trim($tag);
+       
+        if ($tag !== '') 
+          { 
+          $tags[] = $tag; // Just push the tag as a string
+          }   
+        }
+      } 
+        
+    // Manually include the MailChimp library
+    require_once JPATH_PLUGINS . '/user/xchimp2/lib/MailChimp.php';
+    
+    try 
+      {
+      $mailchimp = new MailChimp($apikey);
+      } 
+    catch (\Exception $e) 
+      {  //You can never be too careful
+      $application = Factory::getApplication();
+      $application->enqueueMessage($e->getMessage(), 'error');
+      } 
+
+    //Check if the user's email already exists in our database    
+    $subscriberHash = $mailchimp::subscriberHash($user['email']);
+       
+    $result = $mailchimp->get("lists/{$listid}/members/{$subscriberHash}");
+
+    if ($result['status'] == 'unsubscribed' || $result['status'] == 'subscribed' || $result['status'] == 'cleaned')
+      {//E-mail exists in the database; update with new information
+      $mailchimp->patch("lists/{$listid}/members/{$subscriberHash}",
+        [
+        'email_address' => $user['email'],
+        'status' => 'subscribed',
+        'merge_fields' => ['FNAME' => $firstName, 'LNAME' => $lastName],
+        'tags' => $tags,
+        ]);
+      }
+    else if ($result['status'] == 404)
+      { //E-mail not found; subscribe the user.
+      $mailchimp->post("lists/{$listid}/members", 
+        [
+        'email_address' => $user['email'],
+        'status' => 'subscribed',
+        'merge_fields' => ['FNAME' => $firstName, 'LNAME' => $lastName],
+        'tags' => $tags,
+        ]);
+      }
+         
+    //Log an unsuccessful result
+    if (!$mailchimp->success())
+      {
+      Log::add($mailchimp->getLastError(), Log::ERROR, 'xchimp2-error');
+      if (JDEBUG)
+        {
+        Log::add($mailchimp->getLastError(), Log::DEBUG, 'xchimp2-error');
+        }
+      }
+    }    
+  }
