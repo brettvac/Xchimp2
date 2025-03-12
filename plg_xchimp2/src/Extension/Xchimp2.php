@@ -86,16 +86,17 @@ class Xchimp2 extends CMSPlugin implements SubscriberInterface
       {  //You can never be too careful
       $application = Factory::getApplication();
       $application->enqueueMessage($e->getMessage(), 'error');
+      return;
       } 
 
     //Check if the user's email already exists in our database    
     $subscriberHash = $mailchimp::subscriberHash($user['email']);
        
     $result = $mailchimp->get("lists/{$listid}/members/{$subscriberHash}");
-
-    if ($result['status'] == 'unsubscribed' || $result['status'] == 'subscribed' || $result['status'] == 'cleaned')
-      {//E-mail exists in the database; update with new information
-      $mailchimp->patch("lists/{$listid}/members/{$subscriberHash}",
+    
+    if ($result['status'] == 404)
+      { //E-mail not found; subscribe the user.
+      $mailchimp->post("lists/{$listid}/members", 
         [
         'email_address' => $user['email'],
         'status' => 'subscribed',
@@ -103,12 +104,21 @@ class Xchimp2 extends CMSPlugin implements SubscriberInterface
         'tags' => $tags,
         ]);
       }
-    else if ($result['status'] == 404)
-      { //E-mail not found; subscribe the user.
-      $mailchimp->post("lists/{$listid}/members", 
+
+    else if ($result['status'] == 'subscribed')
+      { //E-mail exists in the database; update with new information
+      $mailchimp->patch("lists/{$listid}/members/{$subscriberHash}",
         [
-        'email_address' => $user['email'],
-        'status' => 'subscribed',
+        'merge_fields' => ['FNAME' => $firstName, 'LNAME' => $lastName],
+        'tags' => $tags,
+        ]);
+      }
+      
+    else if ($result['status'] == 'unsubscribed')
+      { //E-mail exists but user unsubscribed; update and set to pending
+      $mailchimp->patch("lists/{$listid}/members/{$subscriberHash}",
+        [
+        'status' => 'pending',
         'merge_fields' => ['FNAME' => $firstName, 'LNAME' => $lastName],
         'tags' => $tags,
         ]);
