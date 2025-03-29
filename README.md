@@ -2,6 +2,8 @@
  ![Xchimp2 logo](Xchimp2.png)
 Xchimp2 makes it simple to connect your Joomla! user registration system to Mailchimp. Once installed and configured, it will automatically subscribe new users to your chosen Mailchimp list. 
 
+Find the latest installation file [by clicking here](https://github.com/brettvac/Xchimp2/releases/download/1.1/xchimp2.zip)
+
 ## Why Use Xchimp2?
 Joomla! 3 had several great free plugins, but many of them stopped working after the API upgrades starting with Joomla! 4. XChimp is one of those free Mailchimp integrations which I updated to work with the new Joomla! plugin API.
 Whether you're running a membership site, or an eCommerce store, Xchimp2 helps you automatically sync your users with your Mailchimp mailing lists—no manual exports required!
