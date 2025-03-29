@@ -1,6 +1,7 @@
 <?php
 /*****************************************************************
  * @package Xchimp2
+ * Version 1.1
  * @license http://www.gnu.org/licenses/gpl-3.0.html GNU/GPLv3 only
  *****************************************************************/
 namespace Naftee\Plugin\User\Xchimp2\Extension;
@@ -20,15 +21,16 @@ class Xchimp2 extends CMSPlugin implements SubscriberInterface
   
   public static function getSubscribedEvents(): array
     {
+    //Map the Joomla event for the Xchimp2 plugin to our method
     return [ 'onUserAfterSave' => 'handleUserAfterSave' ];
     }
     
-  /**
+   /*
     * Method is called after user data is stored in the database
     */
   public function handleUserAfterSave(Event $event): void
     {
-      
+    //extract the user data array, isNew flag, success status, and message from the event’s arguments array 
     [ $user, $isnew, $success, $msg ] = array_values($event->getArguments());       
 
     if (!$success) 

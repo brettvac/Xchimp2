@@ -1,6 +1,7 @@
 <?php
 /*****************************************************************
  * @package Xchimp2
+ * Version 1.1
  * @license http://www.gnu.org/licenses/gpl-3.0.html GNU/GPLv3 only
  *****************************************************************/
 namespace Naftee\Plugin\User\Xchimp2\Field;
@@ -22,7 +23,6 @@ use Joomla\CMS\Factory;
  */
 class MailchimplistsField extends ListField
   {
-  /* protected $type = 'mailchimplists'; */ //Not strictly required since we are using Namespaces
 
   protected function getOptions()
     {
@@ -62,7 +62,7 @@ class MailchimplistsField extends ListField
           }
         } 
       }
-        
+    //Create a translated option ensuring safe characters in the key    
     else
       {
       $options[] = HTMLHelper::_('select.option', '-1', Text::alt('PLG_USER_XCHIMP2_PROVIDE_API_KEY', preg_replace('/[^a-zA-Z0-9_\-]/', '_', $this->fieldname)));
