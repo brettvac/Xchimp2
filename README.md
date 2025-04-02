@@ -1,5 +1,7 @@
 # Xchimp2 — Mailchimp User Plugin for Joomla!
- ![Xchimp2 logo](Xchimp2.png)
+
+![Xchimp2 Thumbnail](Xchimp2.png)
+
 Xchimp2 makes it simple to connect your Joomla! user registration system to Mailchimp. Once installed and configured, it will automatically subscribe new users to your chosen Mailchimp list. 
 
 Find the latest installation file [by clicking here](https://github.com/brettvac/Xchimp2/releases/download/1.1/xchimp2.zip)
@@ -33,3 +35,18 @@ The original XChimp plugin was developed by **ThemeXpert** as [XChimp](https://w
 Xchimp2 is my attempt to keep Mailchimp integration alive for modern Joomla! sites. 
 
 The plugin uses the [![Drewm Mailchimp API](https://travis-ci.org/drewm/mailchimp-api.svg?branch=master)](https://travis-ci.org/drewm/mailchimp-api)
+
+## FAQ
+**Q: Can I use Xchimp2 to send emails to my grandma?**  
+**A:** Of course! Just make sure she’s signed up for your list and isn’t expecting handwritten letters instead.  
+
+**Q:  Can I use Xchimp2 with Joomla! 3?**
+**A:** No, Xchimp2 is specifically designed for Joomla! 4 and later. If you're using Joomla! 3, get the original Xchimp plugin.
+
+**Q: This plugin is awesome! Can I send a donation?**  
+**A:** Sure! Send your cryptonation to the following wallets:
+`BTC 1PXWZJcBfehqgV25zWdVDS6RF2yVMxFkZD`
+`Eth 0xC9b695D4712645Ba178B4316154621B284e2783D`
+
+**Q: Got any more awesome Joomla! plugins?**  
+**A:** Find them [![right here](https://naftee.com)
