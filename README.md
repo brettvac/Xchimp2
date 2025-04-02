@@ -45,7 +45,9 @@ The plugin uses the [![Drewm Mailchimp API](https://travis-ci.org/drewm/mailchim
 
 **Q: This plugin is awesome! Can I send a donation?**  
 **A:** Sure! Send your cryptonation to the following wallets:
+
 `BTC 1PXWZJcBfehqgV25zWdVDS6RF2yVMxFkZD`
+
 `Eth 0xC9b695D4712645Ba178B4316154621B284e2783D`
 
 **Q: Got any more awesome Joomla! plugins?**  
