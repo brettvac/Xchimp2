@@ -1,6 +1,6 @@
 # Xchimp2 — Mailchimp User Plugin for Joomla!
 
-![Xchimp2 Thumbnail](./Xchimp2.png)
+![Xchimp2 Thumbnail](Xchimp2.png)
 
 Xchimp2 makes it simple to connect your Joomla! user registration system to Mailchimp. Once installed and configured, it will automatically subscribe new users to your chosen Mailchimp list. 
 
