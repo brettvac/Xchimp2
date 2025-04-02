@@ -5,7 +5,7 @@ author:
 
 google_analytics: "G-DP5DG417G7"
   
-theme: "jekyll-theme-architect"
+theme: "jekyll-theme-tactile"
 plugins:
   - jekyll-seo-tag
   - jekyll-sitemap
