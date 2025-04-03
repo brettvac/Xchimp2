@@ -25,6 +25,7 @@ Whether you're running a membership site, or an eCommerce store, Xchimp2 helps y
 6. Save your settings, and you're good to go!
 
 ## Versions
+
 ### 1.0
 Initial commit
 ### 1.1
@@ -34,7 +35,7 @@ Add installation script & fix update server
 The original XChimp plugin was developed by **ThemeXpert** as [XChimp](https://www.themexpert.com/joomla-extensions/xchimp). 
 Xchimp2 is my attempt to keep Mailchimp integration alive for modern Joomla! sites. 
 
-The plugin uses the [Drewm Mailchimp API](https://github.com/drewm/mailchimp-api)
+The plugin uses the [![Drewm Mailchimp API](https://travis-ci.org/drewm/mailchimp-api.svg?branch=master)](https://travis-ci.org/drewm/mailchimp-api)
 
 ## FAQ
 **Q: Can I use Xchimp2 to send emails to my grandma?**  
