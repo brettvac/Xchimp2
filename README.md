@@ -34,7 +34,7 @@ Add installation script & fix update server
 The original XChimp plugin was developed by **ThemeXpert** as [XChimp](https://www.themexpert.com/joomla-extensions/xchimp). 
 Xchimp2 is my attempt to keep Mailchimp integration alive for modern Joomla! sites. 
 
-The plugin uses the [![Drewm Mailchimp API](https://avatars.githubusercontent.com/u/225402)](https://github.com/drewm/mailchimp-api)
+The plugin uses the [Drewm Mailchimp API](https://github.com/drewm/mailchimp-api)
 
 ## FAQ
 **Q: Can I use Xchimp2 to send emails to my grandma?**  
